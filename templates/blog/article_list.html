@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Amith Mathew's Blog{% endblock title %}
+{% block head %}
+  {{ super() }}
+{% endblock head %}
+{% block heading %}
+  <h1 class="display-4 text-center">Amith Mathew</h1>
+{% endblock heading %}
+{% block quote %}The Blorg. Resistance is Futile.{% endblock quote %}
+{% block mainbody %}
+  <div class="row" id="front-row" >
+    <div class="col-sm-6 col-sm-offset-3" id="article-list">
+      {% for entry in content %}
+        <div class="article-entry" >
+          <h4>
+            <a href="{{ entry.fullhtmlout }}" id="hide-link" >{{ entry.title }}</a>
+          </h4>
+          <p>
+            <div class="text-muted" >
+              {{ entry.postdate }}
+            </div>
+          </p>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock mainbody %}

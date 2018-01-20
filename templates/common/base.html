@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">	
+  <head>
+    {% block head %}
+      <!-- Global site tag (gtag.js) - Google Analytics -->
+      <script async src="https://www.googletagmanager.com/gtag/js?id=UA-111754340-1"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-111754340-1');
+      </script>
+      <meta charset="utf-8"/>
+      <title>{% block title %}{% endblock title %}</title>
+      <meta name="author" content="Amith Mathew">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="description" content="Amith's projects, blog, stories.">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+      <link rel="stylesheet" href="{{ site_url }}/css/local.css" >
+      <link rel="canonical" href="{{ site_url }}" >
+      <link rel="icon" type="image/x-icon" href="{{ site_url }}/img/favicon.ico">
+      <script src="https://use.fontawesome.com/1e3c1eac8b.js"></script>
+    {% endblock head %}
+  </head>
+  <body>
+    <header role="banner" >
+      {% block heading %}
+      {% endblock heading %}
+      <p class="lead text-center" >
+        {% block quote %}
+        {% endblock quote %}
+        <br>
+      </p>
+      <hr class="my-4" >
+      <p class="lead text-center simple-nav" >
+        <a href="{{ site_url }}" id="hide-link" >About</a> |
+        <a href="{{ site_url }}/blog" id="hide-link" >Blog</a> |
+        <a href="{{ site_url }}/projects" id="hide-link" >Projects</a> |
+        <a href="{{ site_url }}/stories" id="hide-link" >Stories</a> |
+        <a href="{{ site_url }}/resources" id="hide-link" >Resources</a> |
+        <a href="{{ site_url }}/reading" id="hide-link" ><span style="word-spacing:0.05rem">Reading List</span></a> |
+        <a href="{{ site_url }}/index.html#contact" id="hide-link">Contact</a>
+      </p>
+    </header>
+    <div role="main" class="container" >
+      {% block mainbody %}
+      {% endblock mainbody %}
+    </div>
+    <footer>
+      <p role="contentinfo" class="text-center footer" >
+            Copyright <span class="fa fa-copyright" aria-hidden="true"></span> 2017-2018 Amith Mathew
+      </p>
+    </footer>
+    <script>
+      var _gaq=[['_setAccount','{{ GOOGLE_ANALYTICS }}'],['_trackPageview']];
+      (
+        function(d,t)
+        {
+          var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+          g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+          s.parentNode.insertBefore(g,s)
+        }
+        (document,'script')
+      );
+    </script>
+  </body>
+</html>

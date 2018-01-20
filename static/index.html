@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">	
+    <head>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-111754340-1"></script>
+        <script>
+         window.dataLayer = window.dataLayer || [];
+         function gtag(){dataLayer.push(arguments);}
+         gtag('js', new Date());
+
+         gtag('config', 'UA-111754340-1');
+        </script>
+	<meta charset="utf-8"/>
+	<title>Amith Mathew</title>	
+	<meta name="author" content="Amith Mathew">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="Amith's projects, blog, stories.">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+        <link rel="stylesheet" href="{{ SITEURL }}/theme/css/{{ CSS_FILE }}" type="text/css" />
+        <link rel="stylesheet" href="css/local.css" >
+        <link rel="canonical" href="http://amithm.ca/" >
+        <link rel="icon" type="image/x-icon" href="img/favicon.ico">
+        <script src="https://use.fontawesome.com/1e3c1eac8b.js"></script>
+    </head>
+<body>
+        <header role="banner" >
+                <div class="jumbotron" id="jumbo">
+                    <h1 class="display-4 text-center">Amith Mathew</h1>
+                    <p class="lead text-center" >
+                        <i>Castles in the Air.</i>
+                        <br>
+                    </p>
+                    <hr class="my-4" >
+                    <p class="lead text-center simple-nav" >
+                        <a href="/" id="hide-link" >About</a> |
+                        <a href="/blog" id="hide-link" >Blog</a> |
+                        <a href="/projects" id="hide-link" >Projects</a> |
+                        <a href="/stories" id="hide-link" >Stories</a> |
+                        <!--<a href="/resources" id="hide-link" >Resources</a> |
+                        <a href="/reading" id="hide-link" ><span style="word-spacing:0.05rem">Reading List</span></a> | -->
+                        <a href="/#contact" id="hide-link">Contact</a>
+                    </p>
+                </div>
+        </header>
+        <div role="main" class="container" >
+            <div class="row" id="front-row" >
+                <div class="col-lg-6" id="front-col">
+                    <h4>Hi!</h4>
+		    <p class="text-justify" >
+		    With a degree in Mechanical Engineering, I've spent most of my career working with retailers, CPG manufacturers and even fast food chains helping implement and support Supply Chain systems, typically with JDA Solutions and fairly large Oracle databases. I spent around 7 years working directly with JDA and helped kick off their Cloud Services division. I recently joined AWS as a Solutions Architect to help spread the Gospel of Cloud.
+		    </p>
+                </div>
+                <div class="col-lg-6" id="front-col" >
+		    <h4>Technology</h4>
+		    <p class="text-justify" >
+		        I love understanding and working with technology. I've used and played with -
+		        <ul>
+		            <li>Database technology - schema design, performance optimization</li>
+		            <li>Unix system programming</li>
+		            <li>C Lang</li>
+		            <li>Python</li>
+		            <li>Web technologies and libraries like React</li>
+		            <li>AWS Services (earns my bread!)</li>
+		        </ul>
+		        and more.
+                    </p>
+                </div>
+            </div>
+            <div class="row" id="front-row">
+                <div class="col-lg-6" id="front-col">
+                    <h4>Interests</h4>
+                    <p class="text-justify" >
+                        There are so many things that I want to understand better, it feels like there's too little time for them all. Some of the things I like(or want) to do are -
+                        <ul>
+                            <li>Write fiction</li>
+                            <li>Paint</li>
+                            <li>Music - Piano</li>
+                            <li>Machine Learning</li>
+                            <li>Food science and cooking</li>
+                            <li>OS Design</li>
+                        </ul>
+                        Some of them, like fiction writing, are on this site and have their own section. Others might be under Projects, or might not make an appearance at all.
+                    </p>
+                </div>
+                <div class="col-lg-6" id="front-col">
+                    <h4 id="contact" >Get in touch!</h4>
+                    <ul class="fa-ul" id="social" >
+                        <li><a href="mailto:me@amithm.ca" id="hide-link" ><span class="fa-li fa fa-envelope" aria-hidden="true" ></span>Email</a></li>
+                        <li><a href="https://ca.linkedin.com/in/amithmathew" id="hide-link" ><span class="fa-li fa fa-linkedin-square" aria-hidden="true" ></span>Linkedin</a></li>
+                        <li><a href="https://github.com/amithmathew" id="hide-link" ><span class="fa-li fa fa-github" aria-hidden="true" ></span>Github</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <footer>     
+        <p role="contentinfo" class="text-center footer" >
+            Copyright <span class="fa fa-copyright" aria-hidden="true"></span> 2017-2018 Amith Mathew
+        </p>
+    </footer>
+    <script>
+     var _gaq=[['_setAccount','{{ GOOGLE_ANALYTICS }}'],['_trackPageview']];
+     (
+         function(d,t)
+         {
+             var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+         g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+	     s.parentNode.insertBefore(g,s)
+         }
+         (document,'script')
+     );
+    </script>
+</body>
+</html>
