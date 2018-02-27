@@ -10,8 +10,8 @@ import pyjello_utils as pju
 import datetime
 from collections import OrderedDict
 
-# Meta processing vars.
 
+# Meta processing vars.
 
 class MapProcessor:
 
@@ -20,6 +20,7 @@ class MapProcessor:
         self.md = None
         self.j2env = None
         self.mapping = mapping
+
         # Compile ignore regexes.
         self.RT_REGEX_COMP = list(map(re.compile, pjc.PYJELLO_IGNORE))
         logging.info('%d Ignore regexes compiled.' % len(self.RT_REGEX_COMP))
@@ -37,7 +38,7 @@ class MapProcessor:
 
 
         # Are there missing meta attribs that we should write
-        # back into the file.
+        # back into the file?
         rewrite_flag = False
         logging.debug('Rewrite_flag state is %s' % rewrite_flag)
 
@@ -57,7 +58,14 @@ class MapProcessor:
             outdict['postdate'] = datetime.datetime.today().strftime(pjc.DEFAULT_POSTDATE_FORMAT)
             rewrite_flag = True
 
-    
+        # Draft
+        if 'draft' in metadict:
+            outdict['draft'] = True
+            del indict['draft']
+        else:
+            outdict['draft'] = False
+
+
         # Category
         if 'category' in metadict:
             outdict['category'] = metadict['category']
@@ -99,7 +107,6 @@ class MapProcessor:
 
     def _process_content(self, mapname, filelist):
         """
-         Pulls list of files to process from jello_delta.
          Converts markdown to html with jinja.
         """
         logging.info('Processing files for map %s' % mapname)
@@ -107,7 +114,7 @@ class MapProcessor:
 
         indexlist = []
 
-        template_paths = [ self.mapping[mapname]['templates'], pjc.COMMON_TEMPLATES]
+        template_paths = [ self.mapping[mapname]['templates'], pjc.COMMON_TEMPLATES ]
 
         if len(filelist) == 0:
             logging.info('No files to process for map %s!' % mapname)
@@ -149,6 +156,7 @@ class MapProcessor:
             logging.debug('Metadata extracted by Markdown: %s' % self.md.Meta)
             md_meta = self._build_meta_dict(self.md.Meta)
             logging.debug('Metadata after pyjello processing: %s' % md_meta)
+            # Rewrite markdown file to include missing and default attributes.
             if md_meta['rewrite']:
                 logging.info('Adding meta attributes to file %s' % entry['filename'])
                 # Backup vars
@@ -174,52 +182,60 @@ class MapProcessor:
                     else:
                         logging.info("Not writing attribute with key %s and value %s as it does not satisfy conditions." % (k, md_meta[k]))
                 outtext.append("\n")
-                outtext.extend(self.md.lines)
+                
+                md_content = pju.util_md_meta_cleanup(read_text)
+
+                outtext.extend(md_content)
                 f = open(
                     os.path.join(entry['dir'],
                                  entry['filename']),
                     'w',
-                    encoding="utf-8"
+                    encoding="ascii"
                 )
                 f.write("\n".join(outtext))
                 f.close()
                 logging.info('Meta attributes added to file %s' % entry['filename'])
 
-            logging.debug('Markdown converted for %s' % entry['filename'])
-            logging.debug('Metadata extracted as %s' % md_meta)
+            if md_meta['draft'] == False:
+                logging.debug('Markdown converted for %s' % entry['filename'])
+                logging.debug('Metadata extracted as %s' % md_meta)
 
-            outfilename = os.path.splitext(entry['filename'])[0] + '.html'
-            fulloutpath = os.path.join(self.mapping[mapname]['output'],
-                                       outfilename)
-            absfulloutpath = os.path.join(os.getcwd(), fulloutpath)
-            logging.debug('Output will be written to %s' % absfulloutpath)
-            os.makedirs(os.path.dirname(absfulloutpath), exist_ok=True)
-            with open(absfulloutpath, 'w+') as o:
-                o.write(article_temp.render(content=md_converted,
-                                            meta=md_meta,
-                                            site_url=pjc.SITE_URL))
-            logging.info('Output write complete for %s' % outfilename)
-            md_meta['fullhtmlout'] = os.path.splitext(entry['filename'])[0] + '.html'
-            indexlist.append(md_meta)
+                outfilename = os.path.splitext(entry['filename'])[0] + '.html'
+                fulloutpath = os.path.join(self.mapping[mapname]['output'],
+                                        outfilename)
+                absfulloutpath = os.path.join(os.getcwd(), fulloutpath)
+                logging.debug('Output will be written to %s' % absfulloutpath)
+                os.makedirs(os.path.dirname(absfulloutpath), exist_ok=True)
+                with open(absfulloutpath, 'w+') as o:
+                    o.write(article_temp.render(content=md_converted,
+                                                meta=md_meta,
+                                                site_url=pjc.SITE_URL))
+                logging.info('Output write complete for %s' % outfilename)
+                md_meta['fullhtmlout'] = os.path.splitext(entry['filename'])[0] + '.html'
+                indexlist.append(md_meta)
+            else:
+                logging.info('%s is marked as draft. Not converting markdown.' % entry['filename'])
         logging.info('Content processing complete for map %s' % mapname)
         
-        # Index Rebuild
-        logging.info('Rebuilding index.html for mapname %s' % mapname)
-        # Load article_list.html
-        template_name = 'article_list.html'
-        logging.info('Processing %s' % template_name)
-        try:
-            article_list_temp = self.j2env.get_template(template_name)
-            logging.info('Loaded jinja2 template.')
-        except je.TemplateNotFound:
-            logging.error('Missing template %s!' % template_name)
-
-        fulloutpath = os.path.join(self.mapping[mapname]['output'],
-                                   'index.html')
-        logging.info('Writing output to %s.' % fulloutpath)
-        with open(fulloutpath, 'w+') as o:
-            o.write(article_list_temp.render(content=indexlist, site_url=pjc.SITE_URL))
-        logging.debug('index.html written for map %s' % mapname)
+        if len(indexlist)!=0:
+            # Index Rebuild
+            logging.info('Rebuilding index.html for mapname %s' % mapname)
+            # Load article_list.html
+            template_name = 'article_list.html'
+            logging.info('Processing %s' % template_name)
+            try:
+                article_list_temp = self.j2env.get_template(template_name)
+                logging.info('Loaded jinja2 template.')
+            except je.TemplateNotFound:
+                logging.error('Missing template %s!' % template_name)
+            fulloutpath = os.path.join(self.mapping[mapname]['output'],
+                                        'index.html')
+            logging.info('Writing output to %s.' % fulloutpath)
+            with open(fulloutpath, 'w+') as o:
+                o.write(article_list_temp.render(content=indexlist, site_url=pjc.SITE_URL))
+            logging.debug('index.html written for map %s' % mapname)
+        else:
+            logging.info('No published articles for mapname %s. Skipping index.html build.' % mapname)
 
 # SECTION : PROCESS
     def process_map(self, mapname):

@@ -38,6 +38,51 @@
     word-spacing: 0.5rem;
 }
 
+.article-title {
+    margin-bottom: 0.1rem;
+    font-size: 2.5rem;
+}
+
+#article-content h1{
+    font-size: 2.25rem;
+    margin-top: 1rem;
+}
+
+#article-content h2{
+    font-size: 1.75rem;
+    margin-top: 1rem;
+}
+
+#article-content h3{
+    font-size: 1.5rem;
+    margin-top: 1rem;
+}
+
+#article-content h4{
+    font-size: 1.25rem;
+    margin-top: 1rem;
+}
+
+#article-content h5{
+    font-size: 1.0rem;
+    margin-top: 1rem;
+}
+
+#article-content h6{
+    font-size: 1.0rem;
+    margin-top: 1rem;
+}
+
+
+
+.navbar-brand {
+    margin-right:2rem;
+}
+
+.navbar {
+    margin-bottom: 2rem;
+    margin-left: 1rem;
+}
 
 body, #jumbo {
 background-color: #ffffff;

@@ -23,32 +23,46 @@
     {% endblock head %}
   </head>
   <body>
-    <header role="banner" >
-      {% block heading %}
-      {% endblock heading %}
-      <p class="lead text-center" >
-        {% block quote %}
-        {% endblock quote %}
-        <br>
-      </p>
-      <hr class="my-4" >
-      <p class="lead text-center simple-nav" >
-        <a href="{{ site_url }}" id="hide-link" >About</a> |
-        <a href="{{ site_url }}/blog" id="hide-link" >Blog</a> |
-        <a href="{{ site_url }}/projects" id="hide-link" >Projects</a> |
-        <a href="{{ site_url }}/stories" id="hide-link" >Stories</a> |
-        <a href="{{ site_url }}/resources" id="hide-link" >Resources</a> |
-        <a href="{{ site_url }}/reading" id="hide-link" ><span style="word-spacing:0.05rem">Reading List</span></a> |
-        <a href="{{ site_url }}/index.html#contact" id="hide-link">Contact</a>
-      </p>
-    </header>
+{% block banner %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Amith Mathew</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="{{ site_url }}">About</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ site_url }}/blog">Blog</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ site_url }}/projects">Projects</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ site_url }}/stories">Stories</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ site_url }}/reference">Reference Notes</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ site_url }}/reading">Reading List</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ site_url }}/index.html#contact">Contact</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+{% endblock banner %}
     <div role="main" class="container" >
       {% block mainbody %}
       {% endblock mainbody %}
     </div>
     <footer>
       <p role="contentinfo" class="text-center footer" >
-            Copyright <span class="fa fa-copyright" aria-hidden="true"></span> 2017-2018 Amith Mathew
+            Copyright <span class="fa fa-copyright" aria-hidden="true"></span> 2018 Amith Mathew
       </p>
     </footer>
     <script>

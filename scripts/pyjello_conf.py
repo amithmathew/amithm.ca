@@ -36,5 +36,9 @@ CONTENT_MAPPING = {
     'projects': {'content': 'content/projects',
                  'output': 'output/projects',
                  'templates': 'templates/projects'
-                 }
+                 },
+    'reference': {'content': 'content/reference',
+                  'output': 'output/reference',
+                  'templates': 'templates/reference',
+                  },
 }
