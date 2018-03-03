@@ -60,11 +60,12 @@
       {% block mainbody %}
       {% endblock mainbody %}
     </div>
-    <footer>
-      <p role="contentinfo" class="text-center footer" >
-            Copyright <span class="fa fa-copyright" aria-hidden="true"></span> 2018 Amith Mathew
-      </p>
-    </footer>
+        <div class="container-fluid d-md-flex flex-md-column mt-5 mb-1">
+                <div role="contentinfo" class="small text-center d-flex flex-column flex-wrap footer align-bottom mt-5" >
+                    <p class="mb-0">All views expressed are my own.</p>
+                    <p class="mb-1">&#169 2018 Amith Mathew</p>
+                </div>
+        </div>
     <script>
       var _gaq=[['_setAccount','{{ GOOGLE_ANALYTICS }}'],['_trackPageview']];
       (
