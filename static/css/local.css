@@ -4,26 +4,20 @@
     background-color: white;
 }
 
-
+.navbar-brand{
+    font-size:1.5rem;
+}
 
 
 #front-row {
     padding-bottom: 2rem;
 }
 
-#front-col {
-    padding-left: 1rem;
-    padding-right: 1rem;
-}
 
 #hide-link {
     color: black;
 }
 
-
-.simple-nav {
-    word-spacing: 0.5rem;
-}
 
 .article-title {
     margin-bottom: 0.1rem;
